@@ -1,0 +1,14 @@
+{
+  "name": "examexpert",
+  "description": "A question bank saas webapp for students and pupils.",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./static/css/tailwind.css -o ./static/css/master.css --watch"
+  },
+  "author": "Mwale Jonathan",
+  "devDependencies": {
+    "tailwindcss": "^3.4.12"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.9"
+  }
+}

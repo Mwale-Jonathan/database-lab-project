@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Links -->
+    <link rel="canonical" href="{{ request.path }}">
+    <link rel="home" href="{% url 'index' %}">
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="image/x-icon">
+    <!-- CSS & JS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="{% static 'css/master.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/htmx.min.js' %}"></script>
+    {% if title %}
+    <title>{{ title }} | UNZALibrary</title>
+    {% else %}
+    <title>UNZA Library Management System</title>
+    {% endif %}
+</head>
+
+<body class="font-rubik bg-gray-50">
+    {% include 'includes/header.html' %}
+    <main class="max-w-2xl p-3 mx-auto">
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+
+</html>

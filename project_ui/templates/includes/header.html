@@ -1,0 +1,21 @@
+{% load static %}
+<header class="w-100 bg-gray-800">
+    <div class="mx-auto w-full max-w-2xl px-3">
+        <div class="flex h-14 items-center justify-between">
+            <a class="flex items-center gap-1.5 text-white" href="{% url 'index' %}">
+                <img src="{% static 'images/logo.png' %}" alt="logo" class="size-6" width="148" height="186">
+                <span class="font-medium">
+                    unzalib
+                </span>
+            </a>
+            <div class="flex items-center gap-8 text-white">
+                <a class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium hover:text-gray-300 h-9" href="{% url 'admin:index' %}">
+                    Librarian
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="ml-2 size-3">
+                        <path d="M1 8H15M15 8L8 1M15 8L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
