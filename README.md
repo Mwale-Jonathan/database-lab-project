@@ -1,9 +1,11 @@
 # University Library Management System
-Complete Project Documentation
+
+<img src="screenshot.png" style="width: 100%; margin-bottom: 10px;" />
 
 ## Demo Setup Documentation
 
 ## Table of Contents
+
 1. [System Requirements](#1-system-requirements)
 2. [Installation Guide](#2-installation-guide)
 3. [Project Setup](#3-project-setup)
@@ -16,30 +18,36 @@ Complete Project Documentation
 ## 1. System Requirements
 
 ### 1.1 Minimum Hardware Requirements
-- Processor: 2.0 GHz dual-core processor or better
-- RAM: 4GB minimum (8GB recommended)
-- Storage: 10GB free space
+
+-   Processor: 2.0 GHz dual-core processor or better
+-   RAM: 4GB minimum (8GB recommended)
+-   Storage: 10GB free space
 
 ### 1.2 Software Requirements
-- Python 3.9 or higher
-- PostgreSQL 14.0 or higher
-- pip (Python package manager)
-- Git (for version control)
+
+-   Python 3.9 or higher
+-   PostgreSQL 14.0 or higher
+-   pip (Python package manager)
+-   Git (for version control)
 
 ## 2. Installation Guide
 
 ### 2.1 Installing Python
+
 #### Windows
+
 1. Download Python from [python.org](https://www.python.org/downloads/)
 2. Run the installer
 3. Check "Add Python to PATH"
 4. Click "Install Now"
 5. Verify installation:
+
 ```bash
 python --version
 ```
 
 #### Linux (Ubuntu/Debian)
+
 ```bash
 sudo apt update
 sudo apt install python3 python3-pip
@@ -47,6 +55,7 @@ python3 --version
 ```
 
 #### macOS
+
 ```bash
 brew install python
 python3 --version
@@ -55,6 +64,7 @@ python3 --version
 ### 2.2 Installing PostgreSQL
 
 #### Windows
+
 1. Download PostgreSQL from [postgresql.org](https://www.postgresql.org/download/windows/)
 2. Run the installer
 3. Set a password for the postgres user
@@ -62,6 +72,7 @@ python3 --version
 5. Finish installation
 
 #### Linux (Ubuntu/Debian)
+
 ```bash
 sudo apt update
 sudo apt install postgresql postgresql-contrib
@@ -70,6 +81,7 @@ sudo systemctl enable postgresql
 ```
 
 #### macOS
+
 ```bash
 brew install postgresql
 brew services start postgresql
@@ -78,48 +90,66 @@ brew services start postgresql
 ## 3. Project Setup
 
 ### 3.1 Clone the Repository
+
 ```bash
-git clone <repository-url>
-cd university-library
+git clone https://github.com/Mwale-Jonathan/database-lab-project.git
+cd database-lab-project/project_ui
 ```
 
 ### 3.2 Create and Activate Virtual Environment
+
 #### Windows (cmd)
+
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
 #### Windows (powershell)
+
 ```bash
 python -m venv venv
 venv\Scripts\activate.ps1
 ```
 
 #### Linux/macOS
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 ### 3.3 Install Dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 Required dependencies (requirements.txt):
+
 ```bash
+asgiref==3.8.1
 Django==5.1.2
-psycopg2-binary==2.9.9
-django-htmx==1.17.2
-django-unfold==0.20.4
-django-cleanup==8.1.0
+django-cleanup==9.0.0
+django-dotenv==1.4.2
+django-htmx==1.19.0
+django-unfold==0.40.0
+Faker==30.4.0
+pillow==11.0.0
+psycopg2==2.9.9
+python-dateutil==2.9.0.post0
+six==1.16.0
+sqlparse==0.5.1
+typing_extensions==4.12.2
+tzdata==2024.2
 ```
 
 ## 4. Database Configuration
 
 ### 4.1 Create Database
+
 Login to PostgreSQL:
+
 ```bash
 # Windows
 psql -U postgres
@@ -129,6 +159,7 @@ sudo -u postgres psql
 ```
 
 Create database and user:
+
 ```sql
 CREATE DATABASE library_db;
 CREATE USER library_user WITH PASSWORD 'your_password';
@@ -139,7 +170,9 @@ GRANT ALL PRIVILEGES ON DATABASE library_db TO library_user;
 ```
 
 ### 4.2 Create Database Tables
+
 Connect to the library database:
+
 ```bash
 # Windows
 psql -U postgres -d library_db
@@ -149,6 +182,7 @@ sudo -u postgres psql -d library_db
 ```
 
 Execute the following SQL commands:
+
 ```sql
 -- Create BookCopy table
 CREATE TABLE "BookCopy"(
@@ -267,19 +301,23 @@ ALTER TABLE
 ```
 
 ### 4.3 Verify Database Structure
+
 Check if tables were created successfully:
+
 ```sql
 \dt
 ```
 
 Check table structure:
+
 ```sql
 \d "TableName"
 ```
 
-
 ### 4.4 Environment Variables
+
 Create a `.env` file in the project_ui folder:
+
 ```env
 DEBUG=True
 SECRET_KEY=your-secret-key
@@ -291,12 +329,14 @@ DB_PORT=5432
 ```
 
 ### 4.5 Database Migration
+
 ```bash
 python manage.py makemigrations
 python manage.py migrate
 ```
 
 ### 4.6 Create Superuser
+
 ```bash
 python manage.py createsuperuser
 ```
@@ -304,18 +344,23 @@ python manage.py createsuperuser
 ## 5. Running the Application
 
 ### 5.1 Development Server
+
 ```bash
 python manage.py runserver
 ```
+
 Access the application at http://127.0.0.1:8000/
 
 ### 5.2 Admin Interface
+
 Access the admin interface at http://127.0.0.1:8000/admin/
 
 ### 5.3 Initial Data Setup
+
 Load sample data (if provided):
+
 ```bash
-python manage.py loaddata initial_data.json
+python manage.py generate_library_data 200
 ```
 
 ## 7. Troubleshooting
@@ -323,6 +368,7 @@ python manage.py loaddata initial_data.json
 ### 7.1 Common Issues and Solutions
 
 #### Database Connection Issues
+
 ```bash
 # Check PostgreSQL service status
 # Windows
@@ -336,6 +382,7 @@ brew services list
 ```
 
 #### Migration Issues
+
 ```bash
 # Reset migrations
 python manage.py migrate --fake library zero
@@ -343,6 +390,7 @@ python manage.py migrate library
 ```
 
 #### Static Files Issues
+
 ```bash
 # Collect static files
 python manage.py collectstatic
@@ -350,18 +398,20 @@ python manage.py collectstatic
 
 ### 7.2 Error Codes and Solutions
 
-| Error Code | Description | Solution |
-|------------|-------------|----------|
-| PG001 | Cannot connect to database | Check PostgreSQL service status and credentials |
-| DJ001 | Migration error | Delete migration files and remigrate |
-| DJ002 | Static files not found | Run collectstatic command |
+| Error Code | Description                | Solution                                        |
+| ---------- | -------------------------- | ----------------------------------------------- |
+| PG001      | Cannot connect to database | Check PostgreSQL service status and credentials |
+| DJ001      | Migration error            | Delete migration files and remigrate            |
+| DJ002      | Static files not found     | Run collectstatic command                       |
 
 ### 7.3 Getting Help
-- Project Issues: Create an issue in the GitHub repository
-- Documentation: Check the Django documentation at https://docs.djangoproject.com/
-- Database: Check PostgreSQL documentation at https://www.postgresql.org/docs/
+
+-   Project Issues: Create an issue in the GitHub repository
+-   Documentation: Check the Django documentation at https://docs.djangoproject.com/
+-   Database: Check PostgreSQL documentation at https://www.postgresql.org/docs/
 
 ## Project Structure
+
 ```
 project_ui/
 ├── config/
@@ -395,6 +445,7 @@ project_ui/
 ```
 
 ## Database Schema
+
 ```sql
 CREATE TABLE "BookCopy"(
     "id" bigserial NOT NULL,
@@ -500,71 +551,82 @@ ALTER TABLE
 ## Security Notes
 
 1. Environment Variables
-- Never commit `.env` files to version control
-- Use strong passwords for database users
-- Keep `DEBUG=False` in production
+
+-   Never commit `.env` files to version control
+-   Use strong passwords for database users
+-   Keep `DEBUG=False` in production
 
 2. Database Security
-- Regularly backup the database
-- Use SSL for database connections in production
-- Limit database user permissions
+
+-   Regularly backup the database
+-   Use SSL for database connections in production
+-   Limit database user permissions
 
 3. Django Security
-- Keep Django and all dependencies updated
-- Use HTTPS in production
-- Configure proper ALLOWED_HOSTS
+
+-   Keep Django and all dependencies updated
+-   Use HTTPS in production
+-   Configure proper ALLOWED_HOSTS
 
 ## Deployment Checklist
 
 1. Production Settings
-- Set DEBUG=False
-- Configure ALLOWED_HOSTS
-- Set up proper static file serving
-- Configure secure session cookies
+
+-   Set DEBUG=False
+-   Configure ALLOWED_HOSTS
+-   Set up proper static file serving
+-   Configure secure session cookies
 
 2. Database
-- Create backup strategy
-- Configure connection pooling
-- Set up database monitoring
+
+-   Create backup strategy
+-   Configure connection pooling
+-   Set up database monitoring
 
 3. Performance
-- Enable database query caching
-- Configure static file caching
-- Set up a production web server (e.g., Gunicorn)
+
+-   Enable database query caching
+-   Configure static file caching
+-   Set up a production web server (e.g., Gunicorn)
 
 ## Contributing Guidelines
 
 1. Code Style
-- Follow PEP 8 guidelines
-- Use meaningful variable names
-- Add docstrings to functions and classes
+
+-   Follow PEP 8 guidelines
+-   Use meaningful variable names
+-   Add docstrings to functions and classes
 
 2. Git Workflow
-- Create feature branches
-- Write descriptive commit messages
-- Submit pull requests for review
+
+-   Create feature branches
+-   Write descriptive commit messages
+-   Submit pull requests for review
 
 3. Testing
-- Write unit tests for new features
-- Ensure all tests pass before committing
-- Document test cases
+
+-   Write unit tests for new features
+-   Ensure all tests pass before committing
+-   Document test cases
 
 Remember to check Django's deployment checklist for additional production considerations: https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
 
 ## Design & Implementation Documentation
 
 ## 1. Introduction
 
 ### 1.1 Problem Statement
+
 The current manual or outdated library management systems at universities lead to inefficiencies in cataloging, tracking borrowed books, managing fines, and handling user accounts. These issues result in errors, delays, and difficulty in providing accurate, real-time information. A centralized, automated Library Management System is needed to streamline operations, improve data accuracy, enhance user experience, and increase the overall efficiency of the library.
 
 ### 1.2 System Requirements
+
 The database system covers:
-- Student management
-- Book management
-- Borrowing and Returning Books
-- Fine Management
+
+-   Student management
+-   Book management
+-   Borrowing and Returning Books
+-   Fine Management
 
 ## 2. Data Modelling and Database Design
 
@@ -584,21 +646,24 @@ Loan(id, book_copy_id, student_id, checkout_date, due_date, return_date)
 Fine(id, loan_id, student_id, amount, paid, date_paid)
 
 ### 2.3 Normalization
-- All tables are normalized to Third Normal Form (3NF)
-- Eliminated data redundancy
-- Ensured referential integrity
+
+-   All tables are normalized to Third Normal Form (3NF)
+-   Eliminated data redundancy
+-   Ensured referential integrity
 
 ## 3. Implementation
+
 ### Technology Stack
 
-- Language: Python
-- Backend Framework: Django
-- Frontend : HTML, Tailwindcss, AlpineJS & HTMX
-- Database: Compatible with PostgreSQL/MySQL
-- Admin Interface: Django Admin with Unfold
-- Form Management: Django Forms
+-   Language: Python
+-   Backend Framework: Django
+-   Frontend : HTML, Tailwindcss, AlpineJS & HTMX
+-   Database: Compatible with PostgreSQL/MySQL
+-   Admin Interface: Django Admin with Unfold
+-   Form Management: Django Forms
 
 ### 3.1 Database Creation Script
+
 ```sql
 -- Create Tables with appropriate constraints and indexes
 CREATE TABLE "BookCopy"(
@@ -703,9 +768,11 @@ ALTER TABLE
 
 -- Additional table creation scripts...
 ```
+
 ## 4. Testing Process
 
 ## 3. Test Environment Setup
+
 ```sql
 -- Clear existing test data if needed
 TRUNCATE TABLE "Fine" CASCADE;
@@ -723,6 +790,7 @@ TRUNCATE TABLE "Student" CASCADE;
 ### 4.1 Unit Testing
 
 #### 1. Publisher Table Testing
+
 ```sql
 -- Test Publisher Creation
 INSERT INTO "Publisher" (name, city, country)
@@ -738,6 +806,7 @@ VALUES ('Pearson Education', 'New York', 'USA');
 ```
 
 #### 2. Author Table Testing
+
 ```sql
 -- Test Author Creation
 INSERT INTO "Author" (full_name)
@@ -750,6 +819,7 @@ VALUES ('J.K. Rowling');
 ```
 
 #### 3. Book Table Testing
+
 ```sql
 -- Test Book Creation
 INSERT INTO "Book" (isbn, title, publisher_id, publication_year)
@@ -766,6 +836,7 @@ VALUES ('9780747532744', 'Harry Potter',
 ```
 
 #### 4. Student Table Testing
+
 ```sql
 -- Test Student Creation
 INSERT INTO "Student" (first_name, last_name, email, phone, student_number, timestamp)
@@ -780,6 +851,7 @@ VALUES ('Jane', 'Doe', 'john.doe@university.com', 987654321, 1002, CURRENT_TIMES
 ### 4.2 Integration Testing
 
 #### 1. Book Loan Process Testing
+
 ```sql
 -- Complete book loan process
 BEGIN;
@@ -792,6 +864,7 @@ WHERE title = 'Harry Potter';
 ```
 
 #### 2. Fine Generation Testing
+
 ```sql
 -- Test fine generation for overdue books
 BEGIN;
@@ -814,6 +887,7 @@ COMMIT;
 ### 4.3 Performance Testing
 
 #### 1. Query Performance Tests
+
 ```sql
 -- Test complex join performance
 EXPLAIN ANALYZE
@@ -836,6 +910,7 @@ WHERE l.return_date IS NULL;
 ```
 
 ### 5. Test Data Cleanup
+
 ```sql
 -- Clean up test data after testing
 BEGIN;
@@ -851,19 +926,19 @@ COMMIT;
 ```
 
 ### 4.4 Test Cases Matrix
-| Entity    | Operation      | Test Case Description                        | Expected Result             | Pass/Fail |
-|-----------|----------------|----------------------------------------------|-----------------------------|-----------|
-| Publisher | Create          | Add a new publisher                          | Successful insertion         | Pass      |
-| Publisher | Create          | Create Duplicate                             | Error: Duplicate entry       |           |
-| Author    | Create          | Add a new author                             | Successful insertion         | Pass      |
-| Author    | Create          | Create Duplicate                             | Error: Duplicate entry       |           |
-| Book      | Create          | Add a new book                               | Successful insertion         | Pass      |
-| Book      | Create          | Create Duplicate Title                       | Error: Duplicate entry       |           |
-| Student   | Create          | Add a new student                            | Successful insertion         | Pass      |
-| Student   | Create          | Create Duplicate Email                       | Error: Duplicate entry       |           |
-| Loan      | Process Loan    | Successfully process book loan               |                             | Pass      |
-| Fine      | Process Fine    | Test fine generation for overdue books       |                             | Pass      |
 
+| Entity    | Operation    | Test Case Description                  | Expected Result        | Pass/Fail |
+| --------- | ------------ | -------------------------------------- | ---------------------- | --------- |
+| Publisher | Create       | Add a new publisher                    | Successful insertion   | Pass      |
+| Publisher | Create       | Create Duplicate                       | Error: Duplicate entry |           |
+| Author    | Create       | Add a new author                       | Successful insertion   | Pass      |
+| Author    | Create       | Create Duplicate                       | Error: Duplicate entry |           |
+| Book      | Create       | Add a new book                         | Successful insertion   | Pass      |
+| Book      | Create       | Create Duplicate Title                 | Error: Duplicate entry |           |
+| Student   | Create       | Add a new student                      | Successful insertion   | Pass      |
+| Student   | Create       | Create Duplicate Email                 | Error: Duplicate entry |           |
+| Loan      | Process Loan | Successfully process book loan         |                        | Pass      |
+| Fine      | Process Fine | Test fine generation for overdue books |                        | Pass      |
 
 ## 6. Conclusion
 
